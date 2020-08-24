@@ -61,6 +61,7 @@ public class ProductController {
         model.addAttribute("categories", categoryService.readAllCategories());
         return "/";
     }
+
     @PostMapping("/update")
     public String update(@ModelAttribute("product") Product product) {
         productService.createOrUpdateProduct(product);

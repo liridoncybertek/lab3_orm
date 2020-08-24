@@ -40,13 +40,13 @@ public class CategoryController {
         model.addAttribute("category", categoryService.readById(id));
         return "/";
     }
-    @PostMapping("/create")
+    @PostMapping("/create-category")
     public String create(@ModelAttribute("category") Category category) {
         categoryService.createOrUpdate(category);
         return "/";
     }
 
-    @PostMapping("/update")
+    @PostMapping("/update-category")
     public String update(@ModelAttribute("category") Category category) {
         categoryService.createOrUpdate(category);
         return "/";

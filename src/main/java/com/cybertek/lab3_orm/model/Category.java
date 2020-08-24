@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Data
-@Table(name = "category")
+@Table(name = "categories")
 public class Category extends Model{
 
     private String name;
