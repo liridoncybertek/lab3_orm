@@ -11,4 +11,3 @@ VALUES (1, 'T-Shirt', 10, 29.9, 'New collection of t-shirts has been arrived.',(
        (3, 'MacBook Pro', 5, 1499, 'MacBook pro 13 inch', (SELECT id from categories where name = 'Technology')),
        (4, 'Lego Game', 15, 14.5, 'Lego Game', (SELECT id from categories where name = 'Toys')),
        (5, 'Fishing Reel', 150, 1.77, 'Fishing reel', (SELECT id from categories where name = 'Sports'));
-
