@@ -1,16 +1,20 @@
 package com.cybertek.lab3_orm.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
+@Data
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Table(name = "products")
 public class Product extends Model{
+
     private String name;
 
     private Integer quantity;

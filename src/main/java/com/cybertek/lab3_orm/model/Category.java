@@ -1,15 +1,16 @@
 package com.cybertek.lab3_orm.model;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
+@Data
 @Getter
 @Setter
-@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Table(name = "categories")
 public class Category extends Model{
 

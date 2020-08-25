@@ -27,7 +27,7 @@ public class ProductController {
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("products", productService.readAllProducts());
-        return "/";
+        return "product/index";
     }
 
     @GetMapping("/search")
@@ -40,31 +40,32 @@ public class ProductController {
     @GetMapping("/product")
     public String productDetails(@RequestParam("id") Integer id, Model model) {
         model.addAttribute("product", productService.readById(id));
-        return "/";
+        return "product/product-details";
     }
 
     @GetMapping("/add-product")
     public String addProduct(Model model) {
         model.addAttribute("categories", categoryService.readAllCategories());
-        return "/";
+        model.addAttribute("product", new Product());
+        return "product/add-product";
     }
 
     @PostMapping("/create")
     public String create(@ModelAttribute("product") Product product) {
         productService.createOrUpdateProduct(product);
-        return "/";
+        return "redirect:/";
     }
 
     @GetMapping("/edit-product")
     public String editProduct(@RequestParam("id") Integer id, Model model) {
         model.addAttribute("product", productService.readById(id));
         model.addAttribute("categories", categoryService.readAllCategories());
-        return "/";
+        return "product/edit-product";
     }
 
     @PostMapping("/update")
     public String update(@ModelAttribute("product") Product product) {
         productService.createOrUpdateProduct(product);
-        return "/";
+        return "redirect:/";
     }
 }

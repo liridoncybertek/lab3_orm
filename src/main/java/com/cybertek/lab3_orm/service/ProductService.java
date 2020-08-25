@@ -2,11 +2,13 @@ package com.cybertek.lab3_orm.service;
 
 import com.cybertek.lab3_orm.model.Product;
 import com.cybertek.lab3_orm.repository.ProductRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Slf4j
 public class ProductService{
 
     private ProductRepository productRepository;
@@ -32,6 +34,7 @@ public class ProductService{
     }
 
     public Product createOrUpdateProduct(Product product) {
+
        return productRepository.save(product);
     }
 

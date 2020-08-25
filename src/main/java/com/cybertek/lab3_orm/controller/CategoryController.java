@@ -18,43 +18,48 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
+
     @GetMapping("/categories")
     public String index(Model model) {
         model.addAttribute("categories", categoryService.readAllCategories());
-        return "/";
+        return "category/index";
     }
 
-    @GetMapping("/category")
+    @GetMapping("/category-details")
     public String categoryDetails(@RequestParam("id") Integer id, Model model) {
         model.addAttribute("category", categoryService.readById(id));
-        return "/";
+        return "category/category-details";
     }
 
     @GetMapping("/add-category")
-    public String addCategory() {
-        return "/";
+    public String addCategory(Model model) {
+        model.addAttribute("category", new Category());
+        return "category/add-category";
     }
 
     @GetMapping("/edit-category")
     public String editCategory(@RequestParam("id") Integer id, Model model) {
         model.addAttribute("category", categoryService.readById(id));
-        return "/";
+        return "category/edit-category";
     }
+
     @PostMapping("/create-category")
-    public String create(@ModelAttribute("category") Category category) {
+    public String createCategory(@ModelAttribute("category") Category category, Model model) {
         categoryService.createOrUpdate(category);
-        return "/";
+        model.addAttribute("categories", categoryService.readAllCategories());
+        return "redirect:/categories";
     }
 
     @PostMapping("/update-category")
-    public String update(@ModelAttribute("category") Category category) {
+    public String updateCategory(@RequestParam("id") Integer id, @ModelAttribute("category") Category category, Model model) {
         categoryService.createOrUpdate(category);
-        return "/";
+        model.addAttribute("categories", categoryService.readAllCategories());
+        return "redirect:/categories";
     }
 
     @GetMapping("/delete-category")
-    public String delete(@RequestParam("id") Integer id) {
+    public String deleteCategory(@RequestParam("id") Integer id) {
         categoryService.deleteCategory(id);
-        return "/";
+        return "redirect:/categories";
     }
 }
