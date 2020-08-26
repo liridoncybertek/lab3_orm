@@ -10,15 +10,15 @@
             <form  th:action="@{/search-product}" method="get" th:object="${search}">
                 <div class="row">
                     <div class="col-md-4">
-                        <input type="text" name="productName" class="form-control" placeholder="Add product name" th:field="*{productName}"/>
+                        <input type="text" name="productName" class="form-control" placeholder="Add product name" th:field="*{productName}" th:value="*{productName}"/>
                     </div>
                     <div class="col-md-4">
                         <select class="form-control" th:field="*{categoryName}">
                             <option value="">Please Select</option>
-                            <option th:each="cat : ${categories}"
-                                    th:value="${cat.name}"
-                                    th:text="${cat.name}">
-                            </option>
+                            <option th:each="category : ${categories}"
+                                    th:value="${category.name}"
+                                    th:text="${category.name}"
+                                    th:selected="*{categoryName}"></option>
                         </select>
                     </div>
                     <div class="col-md-4">
@@ -28,13 +28,12 @@
 
             </form>
         </div>
-
-        <div class="row">
+        <div class="row" th:if="${products.size() > 0}">
             <div class="col-md-4" th:each="product: ${products}">
                 <div class="product-inner-wrap">
                     <div class="image-wrap">
                         <a  th:href="@{/product(id=${product.id})}">
-                            <img th:src="@{/images/no-image.jpg}" th:alt="no-img" style="width: 100%">
+                            <img th:src="@{/images/no-image.jpg}" th:alt="no-img" style="width: 300px">
                         </a>
                     </div>
                     <h5 class="product-name" th:text="${product.name}"></h5>
@@ -47,6 +46,13 @@
                 </div>
             </div>
         </div>
+
+        <div class="row" th:if="${products.size() == 0}">
+            <div class="result-found">
+                <h5>No results found!</h5>
+            </div>
+        </div>
+
     </div>
 </div>
 <footer th:insert="/fragments/footer :: footer"></footer>

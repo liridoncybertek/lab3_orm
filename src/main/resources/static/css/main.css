@@ -79,4 +79,22 @@
     background-color: #0069d9;
     border-color: #0062cc;
 }
+.search-wrapper {
+    margin-bottom: 20px;
+}
+.search-wrapper .search-button {
+    min-width: 150px;
+    border-radius: 30px;
+}
+.result-found {
+    width: 100%;
+    float: left;
+    padding: 40px;
+    border: 1px solid rgba(0,0,0,.075);
+    border-radius: 20px;
+}
+.result-found h5 {
+    text-align: center;
+    color: #6495ed;
+}
 
