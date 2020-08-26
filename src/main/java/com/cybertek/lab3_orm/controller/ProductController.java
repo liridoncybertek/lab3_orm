@@ -4,14 +4,14 @@ import com.cybertek.lab3_orm.model.DTO.SearchDTO;
 import com.cybertek.lab3_orm.model.Product;
 import com.cybertek.lab3_orm.service.CategoryService;
 import com.cybertek.lab3_orm.service.ProductService;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.List;
 
 @Controller
 public class ProductController {
@@ -62,6 +62,7 @@ public class ProductController {
     @GetMapping("/product")
     public String productDetails(@RequestParam("id") Integer id, Model model) {
         model.addAttribute("product", productService.readById(id));
+        model.addAttribute("quantity", 1);
         return "product/product-details";
     }
 
@@ -88,6 +89,12 @@ public class ProductController {
     @PostMapping("/update")
     public String update(@ModelAttribute("product") Product product) {
         productService.createOrUpdateProduct(product);
+        return "redirect:/";
+    }
+
+    @PostMapping("/buy-product")
+    public String buy(@RequestParam("id") Integer id, Model model, Integer quantity) {
+        productService.buyProduct(id, quantity);
         return "redirect:/";
     }
 }

@@ -22,7 +22,7 @@
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <input type="submit" class="btn btn-primary search-button" value="Search"/>
+                        <input type="submit" class="btn btn-primary rounded-button" value="Search"/>
                     </div>
                 </div>
 
@@ -33,7 +33,7 @@
                 <div class="product-inner-wrap">
                     <div class="image-wrap">
                         <a  th:href="@{/product(id=${product.id})}">
-                            <img th:src="@{/images/no-image.jpg}" th:alt="no-img" style="width: 300px">
+                            <img th:src="@{/images/no-image.jpg}" th:alt="no-img" style="width: 100%">
                         </a>
                     </div>
                     <h5 class="product-name" th:text="${product.name}"></h5>

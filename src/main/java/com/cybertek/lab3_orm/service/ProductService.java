@@ -2,6 +2,7 @@ package com.cybertek.lab3_orm.service;
 
 import com.cybertek.lab3_orm.model.Product;
 import com.cybertek.lab3_orm.repository.ProductRepository;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -21,20 +22,13 @@ public class ProductService {
     }
 
     public List<Product> readAllProducts() {
-        return productRepository.findAll();
+        return productRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
     }
 
     public Product readById(Integer id) {
         return productRepository.findById(id).orElse(null);
     }
 
-    public List<Product> readAllByContainingName(String name) {
-        return productRepository.findByNameNativeQuery(name);
-    }
-
-    public List<Product> readAllByCategory(Integer categoryId) {
-        return productRepository.findByCategoryId(categoryId);
-    }
 
     public Product createOrUpdateProduct(Product product) {
         return productRepository.save(product);
@@ -49,17 +43,21 @@ public class ProductService {
         StringBuilder query = new StringBuilder();
         query.append("SELECT * FROM products p INNER JOIN categories c on p.category_id = c.id ");
         if(!StringUtils.isEmpty(productName) && StringUtils.isEmpty(categoryName)) {
-            query.append("WHERE p.name ILIKE '").append(productName).append("'");
+            query.append("WHERE p.name ILIKE '%").append(productName).append("%'");
         }
         if(StringUtils.isEmpty(productName) && !StringUtils.isEmpty(categoryName)) {
-            query.append("WHERE c.name ILIKE '").append(categoryName).append("'");
+            query.append("WHERE c.name = '").append(categoryName).append("'");
         }
         if(!StringUtils.isEmpty(productName) && !StringUtils.isEmpty(categoryName)) {
-            query.append("WHERE p.name ILIKE '")
-                    .append(productName).append("'")
+            query.append("WHERE p.name ILIKE '%")
+                    .append(productName).append("%'")
                     .append(" AND c.name = '")
                     .append(categoryName).append("'");
         }
         return entityManager.createNativeQuery(query.toString(), Product.class).getResultList();
+    }
+
+    public void buyProduct(Integer productId, Integer subtractQuantity) {
+         productRepository.updateQuantity(subtractQuantity, productId);
     }
 }

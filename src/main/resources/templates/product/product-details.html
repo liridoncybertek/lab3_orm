@@ -7,7 +7,7 @@
 <div class="container">
     <div class="details-wrapper">
         <div class="edit-button-wrap">
-            <a class="edit-button-btn" th:href="@{/edit-product(id=${product.id})}">Edit</a>
+            <a class="edit-button-btn btn btn-primary rounded-button" th:href="@{/edit-product(id=${product.id})}">Edit</a>
         </div>
         <div class="details-wrapper-inner">
             <div class="row">
@@ -37,6 +37,21 @@
                     <div class="span-description">Description:</div>
                     <p class="category-desc" th:text="${product.description}"></p>
                 </div>
+            </div>
+
+            <div class="purchase-wrapper">
+                <form th:action="@{/buy-product(id=${product.id})}" th:object="${quantity}" th:if="${product.quantity > 0}" method="post">
+                    <div class="form-wrapper">
+                        <div class="quantity-wrap">
+                            <span class="quantity">Qty:</span>
+                            <input type="number" class="qty-input" id="quantity" name="quantity" th:max="${product.quantity}" value="1">
+                        </div>
+                        <input type="submit" class="btn btn-primary rounded-button" value="Buy">
+                    </div>
+
+                </form>
+                <span th:if="${product.quantity == 0}" class="out-of-stock">Out of stock</span>
+
             </div>
         </div>
     </div>
