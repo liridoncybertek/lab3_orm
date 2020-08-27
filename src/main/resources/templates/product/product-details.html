@@ -41,7 +41,7 @@
 
             <div class="purchase-wrapper">
                 <form th:action="@{/buy-product(id=${product.id})}" th:object="${quantity}" th:if="${product.quantity > 0}" method="post">
-                    <div class="form-wrapper">
+                    <div class="form-buy-wrapper">
                         <div class="quantity-wrap">
                             <span class="quantity">Qty:</span>
                             <input type="number" class="qty-input" id="quantity" name="quantity" th:max="${product.quantity}" value="1">

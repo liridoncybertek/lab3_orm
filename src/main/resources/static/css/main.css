@@ -92,12 +92,12 @@
     color: #6495ed;
 }
 
-.form-wrapper {
+.form-buy-wrapper {
     display: flex;
     justify-content: flex-end;
     align-items: center;
 }
-.form-wrapper .quantity-wrap {
+.form-buy-wrapper .quantity-wrap {
     justify-content: space-between;
 }
 
