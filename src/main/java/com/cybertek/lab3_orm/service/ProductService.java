@@ -42,6 +42,7 @@ public class ProductService {
     public List<Product> searchProducts(String productName, String categoryName) {
         StringBuilder query = new StringBuilder();
         query.append("SELECT * FROM products p INNER JOIN categories c on p.category_id = c.id ");
+
         if(!StringUtils.isEmpty(productName) && StringUtils.isEmpty(categoryName)) {
             query.append("WHERE p.name ILIKE '%").append(productName).append("%'");
         }

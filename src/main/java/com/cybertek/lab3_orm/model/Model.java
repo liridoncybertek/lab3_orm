@@ -13,4 +13,5 @@ public abstract class Model {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
 }
