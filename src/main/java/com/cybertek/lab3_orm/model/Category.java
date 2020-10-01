@@ -12,7 +12,11 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 @Table(name = "categories")
-public class Category extends Model{
+public class Category {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     private String name;
 

@@ -13,7 +13,11 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Builder
 @Table(name = "products")
-public class Product extends Model{
+public class Product{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     private String name;
 
@@ -23,7 +27,7 @@ public class Product extends Model{
 
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id")
     private Category category;
 }
